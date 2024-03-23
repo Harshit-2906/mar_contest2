@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Using HTML</title>
+
+    <style>
+        *{
+            background-color: black;
+        }
+        h2{
+            color: white;
+            padding-left: 10px;
+        }
+        #middle{
+            color: white;
+            margin: 15px;
+        }
+        #increment, #decrement{
+            background-color: white;
+            justify-content: space-between;
+            color: black;
+            padding: 10px;
+            margin: 10px;
+        }
+        #clear{
+            background-color: black;
+            justify-content: space-between;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 2px solid white;    
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Counter using HTML</h2>
+
+    <div id="middle">0</div>
+    <p id="error" style="color: red; display: none;">Error : Cannot go below 0</p>
+    
+    <button id="increment">Increment</button>
+    <button id="decrement">Decrement</button>
+    <button id="clear">Clear</button>
+    
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let middleDiv = document.getElementById("middle");
+            let incrementButton = document.getElementById("increment");
+            let decrementButton = document.getElementById("decrement");
+            let clearButton = document.getElementById("clear");
+            let error = document.getElementById("error");
+
+            let count = 0;
+
+            incrementButton.addEventListener("click", function () {
+                count++;
+                middleDiv.innerHTML = count;
+                if (count > 0) {
+                    decrementButton.style.display = "block";
+                }
+                if (count > 1) {
+                    clearButton.style.display = "block";
+                }
+            });
+
+            decrementButton.addEventListener("click", function () {
+                if (count === 0) {
+                    error.style.display = "block";
+                    return;
+                }
+                count--;
+                middleDiv.innerHTML = count;
+                if (count === 0) {
+                    decrementButton.style.display = "none";
+                    clearButton.style.display = "none";
+                }
+                if (count <= 1) {
+                    clearButton.style.display = "none";
+                }
+                error.style.display = "none";
+            });
+
+            clearButton.addEventListener("click", function () {
+                count = 0;
+                middleDiv.innerHTML = count;
+                decrementButton.style.display = "none";
+                clearButton.style.display = "none";
+                error.style.display = "none";
+            });
+        });
+
+    </script>
+</body>
+
+</html>
